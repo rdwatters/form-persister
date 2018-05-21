@@ -35,7 +35,7 @@ By disabling `autocomplete`, you are running the risk of removing a convenient d
 
 You can call a new `FormPersister` with the following code:
 
-```
+```js
 var contactForm = new FormPersister();
 ```
 
