@@ -74,24 +74,34 @@ var FormPersister = function() {
         // Check to see if both the "Dropp" down is configured to true and that the end user has already selected a option from the list
         if (localStorage.getItem('selectedForm') !== null) {
             var chosenOption = localStorage.getItem('selectedForm'),
+                
                 // converts selected option text to css class
                 formGroupClass = "".concat('.group-', chosenOption.toLowerCase().replace(' ', '-')),
-                // list of from group classes
+                
+                // list of form group classes
                 formGroups = [".group-something-else", ".group-new-business", ".group-careers"];
-            document.querySelector('span.dropp-header__title.js-value').textContent = chosenOption;
-            document.querySelectorAll('.form-block, .info-group-1').forEach(function(block) {
+                
+                // change display text of option dropdown to the selected option
+                document.querySelector('span.dropp-header__title.js-value').textContent = chosenOption;
+                
+                // grab the two form blocks that show regardless of option, and set aria attribute    
+                document.querySelectorAll('.form-block, .info-group-1').forEach(function(block) {
                 block.style.display = "block";
                 block.setAttribute("aria-hidden","false");
+
             });
 
             // Iterate through form group classnames in above array
             for (var k = 0; k < formGroups.length; k++) {
-                // if the formGroup doesn't equal the class, hide it
+                
+                // Hide the form groups if they weren't selected 
                 if (formGroups[k] !== formGroupClass) {
                     document.querySelector(formGroups[k]).style.display = "none";
                     document.querySelector(formGroups[k]).setAttribute("aria-hidden", "true");
-                } else {
-                    // otherwise, show it    
+                }
+
+                // If chosen, show it, update aria 
+                else {
                     document.querySelector(formGroups[k]).style.display = "block";
                     document.querySelector(formGroups[k]).setAttribute("aria-hidden", "false");
                 }
@@ -115,22 +125,29 @@ var FormPersister = function() {
         localStorage.setItem(inputId, inputValue);
     }, true);
 
-
+    // If this is a returning visitor, auto-fill inputs from localStorage
     if (hasVisited) {
         autofillInputs(formInputs);
     }
-
+    
+    // Function to auto-complete inputs
     function autofillInputs(inputs) {
         inputs.forEach(function(item) {
+            // Note this requires a unique ID for each input; you can do this on the client withe assignInputIDs config option
             var specificInput = document.getElementById(item.id);
+
+            // Fill in inputs, but check to make sure they aren't checkboxes or submit buttons
             if ((localStorage.getItem(item.id)) && ((specificInput.type != "submit") && (specificInput.type != "checkbox"))) {
                 specificInput.value = localStorage.getItem(item.id);
+
+                // Add class to 3-d transform placeholder text
                 specificInput.classList.add('has-value');
             }
         })
     }
 };
 
+// Instantiate FormPersister
 var contactForm = new FormPersister({
     inputSelector: ".form input, .form textarea",
     addDropdown: true,
