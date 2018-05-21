@@ -1,0 +1,24 @@
+
+try{
+	var jqueryIsLoaded=jQuery;
+	jQueryIsLoaded=true;
+}
+
+catch(err){
+	var jQueryIsLoaded=false;
+}
+
+if(jQueryIsLoaded){
+	var jQueryFormalyzer=false;
+//alert('jquery ALREADY loaded');
+}
+else{
+	var jQueryFormalyzer=true;
+	document.write(unescape("%3Cscript src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js' type='text/javascript'%3E%3C/script%3E"));
+//alert('jquery now loaded');
+}
+
+if (llfrmid == 19779 || llfrmid == 18047 || llfrmid == 14280 || llfrmid == 15951 || llfrmid == 18412 || llfrmid == 26622 || llfrmid == 11222) {
+document.write(unescape("%3Cscript src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+
