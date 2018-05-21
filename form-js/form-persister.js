@@ -1,6 +1,6 @@
 "use strict";
 
-// Quick polyfill for browsers that don't support forEach on node lists (i.e. IE11)
+// Quick polyfill for browsers that don't support forEach on node lists (namely, IE11)
 // https://developer.mozilla.org/en-US/docs/Web/API/NodeList/forEach#Browser_Compatibility
 if (window.NodeList && !NodeList.prototype.forEach) {
     NodeList.prototype.forEach = function(callback, thisArg) {
@@ -16,7 +16,8 @@ var FormPersister = function() {
 
     //Check to see if user has been to page and filled out at least one input
     var hasVisited = (localStorage.getItem('hasVisited') !== null);
-
+    
+    /*CONFIGURATION BEGIN*/
     //Define option defaults
     var defaults = {
         inputSelector: "input, textarea",
@@ -48,8 +49,16 @@ var FormPersister = function() {
     // Assign form to first form denoted in config
     var form = document.querySelector(defaults.formSelector);
 
+    // Disable autocomplete attribute to formSelector
     if (defaults.disableAutocomplete) {
-        form.setAttribute('autocomplete','off');
+        form.setAttribute('autocomplete', 'off');
+    }
+
+    // Adds html IDs to each input on pageload
+    if (defaults.assignInputIds) {
+        for (var i = 0; i < formInputs.length; i++) {
+            formInputs[i].id = "input-id-" + i;
+        }
     }
 
     // NOTE: addDropdown is very specific to this form; therefore the default is set to *not* include the following code to try and keep FormPersister as reusable as possible
@@ -61,16 +70,15 @@ var FormPersister = function() {
                 localStorage.setItem('selectedForm', selectedForm);
             }, false);
         }
+
         // Check to see if both the "Dropp" down is configured to true and that the end user has already selected a option from the list
         if (localStorage.getItem('selectedForm') !== null) {
             var chosenOption = localStorage.getItem('selectedForm'),
                 formGroup = "".concat('.group-', chosenOption.toLowerCase().replace(' ', '-'));
-            console.log(formGroup);
             document.querySelector('span.dropp-header__title.js-value').textContent = chosenOption;
             document.querySelector('.form-block').style.display = "block";
             document.querySelector('.form-block .info-group-1').style.display = "block";
             document.querySelector(formGroup).style.display = "block";
-            $(".form-block .info-group-1").show();
             if (chosenOption == "New Business") {
                 document.querySelector('.form-block .group-careers').style.display = "none";
                 document.querySelector('.form-block .group-something-else').style.display = "none";
@@ -83,15 +91,13 @@ var FormPersister = function() {
             }
         }
     }
-
-
-
+    /*CONFIGURATION END*/
 
 
     // Add blur event to the entire form
     form.addEventListener('blur', function(event) {
 
-        // Grab input's ID and value
+        // Grab input's ID and value once the input no longer has focus
         var inputId = event.target.id,
             inputValue = event.target.value;
 
@@ -102,12 +108,7 @@ var FormPersister = function() {
         localStorage.setItem(inputId, inputValue);
     }, true);
 
-    // Adds html IDs to each input on pageload
-    if (defaults.assignInputIds) {
-        for (var i = 0; i < formInputs.length; i++) {
-            formInputs[i].id = "input-id-" + i;
-        }
-    }
+
     if (hasVisited) {
         autofillInputs(formInputs);
     }

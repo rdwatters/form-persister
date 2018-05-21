@@ -49,6 +49,8 @@ This will run the function with its default options. The full configuration opti
 | `addDropdown` | `false` | specific code just for `dropp` inputs for RP contact form |
 | `disableAutocomplete` | `false` | set to `true`, adds `autocomplete="off"` to `formSelector` | 
 
+> Using `assignInputIds` may seem convenient but will lose all value if there is more than 1 form using the `form-persister.js` script on the website. Since "unique" IDs are added sequentially (e.g. `id=""`, `id="`)
+
 The configuration run in the [sample page][sample] uses the following configuration:
 
 ```js
@@ -60,7 +62,12 @@ var contactForm = new FormPersister({
 });
 ```
 
-> **Note:** The markup for the form is different from that found on <http://anetakostic.com/RP-Site/Rightpoint.html> in that unique IDs have been added to each of the inputs being written to `localStorage`.
+> **Note:** The markup for the form is different from that found on <http://anetakostic.com/RP-Site/Rightpoint.html> in that unique IDs have been added to each of the inputs being written to `localStorage` in the markup of the page itself.
+
+
+## Dependencies
+
+`form-persister.js` is written in `strict mode` in vanilla ES5 and does not require jQuery or transpilation tool to run. 
 
 
 [auto]: https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion
