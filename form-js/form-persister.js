@@ -16,7 +16,7 @@ var FormPersister = function() {
 
     //Check to see if user has been to page and filled out at least one input
     var hasVisited = (localStorage.getItem('hasVisited') !== null);
-    
+
     /*CONFIGURATION BEGIN*/
     //Define option defaults
     var defaults = {
@@ -74,20 +74,27 @@ var FormPersister = function() {
         // Check to see if both the "Dropp" down is configured to true and that the end user has already selected a option from the list
         if (localStorage.getItem('selectedForm') !== null) {
             var chosenOption = localStorage.getItem('selectedForm'),
-                formGroup = "".concat('.group-', chosenOption.toLowerCase().replace(' ', '-'));
+                // converts selected option text to css class
+                formGroupClass = "".concat('.group-', chosenOption.toLowerCase().replace(' ', '-')),
+                // list of from group classes
+                formGroups = [".group-something-else", ".group-new-business", ".group-careers"];
             document.querySelector('span.dropp-header__title.js-value').textContent = chosenOption;
-            document.querySelector('.form-block').style.display = "block";
-            document.querySelector('.form-block .info-group-1').style.display = "block";
-            document.querySelector(formGroup).style.display = "block";
-            if (chosenOption == "New Business") {
-                document.querySelector('.form-block .group-careers').style.display = "none";
-                document.querySelector('.form-block .group-something-else').style.display = "none";
-            } else if (chosenOption == "Careers") {
-                document.querySelector('.form-block .group-something-else').style.display = "none";
-                document.querySelector('.form-block .group-new-business').style.display = "none";
-            } else if (chosenOption == "Something Else") {
-                document.querySelector('.form-block .group-new-business').style.display = "none";
-                document.querySelector('.form-block .group-new-careers').style.display = "none";
+            document.querySelectorAll('.form-block, .info-group-1').forEach(function(block) {
+                block.style.display = "block";
+                block.setAttribute("aria-hidden","false");
+            });
+
+            // Iterate through form group classnames in above array
+            for (var k = 0; k < formGroups.length; k++) {
+                // if the formGroup doesn't equal the class, hide it
+                if (formGroups[k] !== formGroupClass) {
+                    document.querySelector(formGroups[k]).style.display = "none";
+                    document.querySelector(formGroups[k]).setAttribute("aria-hidden", "true");
+                } else {
+                    // otherwise, show it    
+                    document.querySelector(formGroups[k]).style.display = "block";
+                    document.querySelector(formGroups[k]).setAttribute("aria-hidden", "false");
+                }
             }
         }
     }
