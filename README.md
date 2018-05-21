@@ -1,6 +1,8 @@
-# Testing `form-persister.js` with RP Contact Form
+# Persisting Form Data
 
-## Notes
+You can see [the form in action][sample].
+
+## Autcomplete
 
 Most modern browsers will [`autocomplete`][auto] certain information for form inputs. In order to make the `form-persister.js` work, you'll need add the `autocomplete` attribute to the `<form>` element:
 
@@ -8,22 +10,56 @@ Most modern browsers will [`autocomplete`][auto] certain information for form in
 <form class="form" data-parsley-validate="" autocomplete="off">
 ```
 
+> You can also disable `autocomplete` on the client using the `disableAutocomplete` [Configuration](#configuration) option below.
+
 ## UX Considerations for Requested Behavior
 
-Before implementing this script, it's probably worth talking with UX re: whether this is an optimal experience for end users who leverage this functionality frequently. The input fields being used for the RP contact form are typical of those found in either the browser's default `autocomplete` behavior or in user profiles (e.g. Keychain for OSX/iOS, Chrome autocomplete, etc):
+The script included in this repo leverages the HTML5 [`localStorage`][ls] API, which has the advantage of persisting key-value data across sessions (i.e. in contrast with `sessionStorage`).
+
+There is a UX consideration before implementing this script. The input fields being used for the [contact form in the sample page][sample] are typical candidates for a browser's default `autocomplete` behavior or auto-completed fields based on user profiles (e.g. Keychain for OSX/iOS, Chrome's autocomplete, etc):
 
 * First Name
 * Last Name
 * Email
 * Phone Number
 
-All of the following values map back to basic contact information stored in an end user's device. If you are an iPhone user, you can see this behavior in the wild by visiting <https://www.rightpoint.com/company/contact> and opening the modal form.
+All of the above values map back to basic contact information stored in an end user's device. If you are an iPhone user, you can see this behavior in the wild by visiting <https://www.rightpoint.com/company/contact>, selecting the "Contact Us" button, and launching the modal form on the website:
 
 ![Screenshot of autocomplete functionality on iOS that pulls from the user's contact information](./temp-img/iphone-screenshot.png)
 
-The script included in this repo leverages the HTML5 [`localStorage`][ls] API, which has the advantage of persisting across sessions but will still be deleted when a user clears their history and cache. The default browser behavior mentioned above will, naturally, persist across sessions, domains, and even after a user clears the browser cache and cookies. 
 
+## Configuration
+
+You can call a new `FormPersister` with the following code:
+
+```
+var contactForm = new FormPersister();
+```
+
+This will run the function with its default options. The full configuration options are as follows:
+
+| Option | Default | Purpose |
+| ------ | ------- | ------- |
+| `inputSelector` | `"input, textarea"` | which elements to persist in localStorage | 
+| `formSelector` | `"form"` | assigns single selector to form | 
+| `assignInputIds` | `false` | adds unique IDs to each input; only a good idea if you are not able to assign IDs in `<form>` markup |
+| `addDropdown` | `false` | specific code just for `dropp` inputs for RP contact form |
+| `disableAutocomplete` | `false` | set to `true`, adds `autocomplete="off"` to `formSelector` | 
+
+The configuration run in the [sample page][sample] uses the following configuration:
+
+```js
+var contactForm = new FormPersister({
+    inputSelector: ".form input, .form textarea",
+    addDropdown: true,
+    formSelector: ".form",
+    disableAutocomplete: true
+});
+```
+
+> **Note:** The markup for the form is different from that found on <http://anetakostic.com/RP-Site/Rightpoint.html> in that unique IDs have been added to each of the inputs being written to `localStorage`.
 
 
 [auto]: https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion
 [ls]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+[sample]: https://rdwatters.github.io/form-persister/

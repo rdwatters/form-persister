@@ -1,15 +1,15 @@
 "use strict";
 
 // Quick polyfill for browsers that don't support forEach on node lists (i.e. IE11)
-// See here: https://developer.mozilla.org/en-US/docs/Web/API/NodeList/forEach#Browser_Compatibility
-// if (window.NodeList && !NodeList.prototype.forEach) {
-//     NodeList.prototype.forEach = function(callback, thisArg) {
-//         thisArg = thisArg || window;
-//         for (var i = 0; i < this.length; i++) {
-//             callback.call(thisArg, this[i], i, this);
-//         }
-//     };
-// }
+// https://developer.mozilla.org/en-US/docs/Web/API/NodeList/forEach#Browser_Compatibility
+if (window.NodeList && !NodeList.prototype.forEach) {
+    NodeList.prototype.forEach = function(callback, thisArg) {
+        thisArg = thisArg || window;
+        for (var i = 0; i < this.length; i++) {
+            callback.call(thisArg, this[i], i, this);
+        }
+    };
+}
 
 
 var FormPersister = function() {
@@ -21,7 +21,9 @@ var FormPersister = function() {
     var defaults = {
         inputSelector: "input, textarea",
         formSelector: "form",
-        assignInputIds: false
+        assignInputIds: false,
+        addDropdown: false,
+        disableAutocomplete: false
     }
 
     // Create options by extending defaults with the passed in arugments
@@ -45,6 +47,46 @@ var FormPersister = function() {
 
     // Assign form to first form denoted in config
     var form = document.querySelector(defaults.formSelector);
+
+    if (defaults.disableAutocomplete) {
+        form.setAttribute('autocomplete','off');
+    }
+
+    // NOTE: addDropdown is very specific to this form; therefore the default is set to *not* include the following code to try and keep FormPersister as reusable as possible
+    if (defaults.addDropdown) {
+        var dropdownInputs = document.querySelectorAll('input[name="dropp"]');
+        for (var j = 0; j < dropdownInputs.length; j++) {
+            dropdownInputs[j].addEventListener('click', function(evt) {
+                var selectedForm = evt.target.value;
+                localStorage.setItem('selectedForm', selectedForm);
+            }, false);
+        }
+        // Check to see if both the "Dropp" down is configured to true and that the end user has already selected a option from the list
+        if (localStorage.getItem('selectedForm') !== null) {
+            var chosenOption = localStorage.getItem('selectedForm'),
+                formGroup = "".concat('.group-', chosenOption.toLowerCase().replace(' ', '-'));
+            console.log(formGroup);
+            document.querySelector('span.dropp-header__title.js-value').textContent = chosenOption;
+            document.querySelector('.form-block').style.display = "block";
+            document.querySelector('.form-block .info-group-1').style.display = "block";
+            document.querySelector(formGroup).style.display = "block";
+            $(".form-block .info-group-1").show();
+            if (chosenOption == "New Business") {
+                document.querySelector('.form-block .group-careers').style.display = "none";
+                document.querySelector('.form-block .group-something-else').style.display = "none";
+            } else if (chosenOption == "Careers") {
+                document.querySelector('.form-block .group-something-else').style.display = "none";
+                document.querySelector('.form-block .group-new-business').style.display = "none";
+            } else if (chosenOption == "Something Else") {
+                document.querySelector('.form-block .group-new-business').style.display = "none";
+                document.querySelector('.form-block .group-new-careers').style.display = "none";
+            }
+        }
+    }
+
+
+
+
 
     // Add blur event to the entire form
     form.addEventListener('blur', function(event) {
@@ -81,7 +123,9 @@ var FormPersister = function() {
     }
 };
 
-var formPersist = new FormPersister({
+var contactForm = new FormPersister({
     inputSelector: ".form input, .form textarea",
-    assignInputIds: false
+    addDropdown: true,
+    formSelector: ".form",
+    disableAutocomplete: true
 });
