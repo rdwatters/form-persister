@@ -11,7 +11,7 @@ if (window.NodeList && !NodeList.prototype.forEach) {
     };
 }
 
-
+// Constructor definition
 var FormPersister = function() {
 
     //Check to see if user has been to page and filled out at least one input
@@ -63,8 +63,14 @@ var FormPersister = function() {
 
     // NOTE: addDropdown is very specific to this form; therefore the default is set to *not* include the following code to try and keep FormPersister as reusable as possible
     if (defaults.addDropdown) {
+
+        // Assign inputs from first question
         var dropdownInputs = document.querySelectorAll('input[name="dropp"]');
+
+        // Iterate through dropdown options
         for (var j = 0; j < dropdownInputs.length; j++) {
+
+            // Listener assigns events to chose option and saves to localStorage
             dropdownInputs[j].addEventListener('click', function(evt) {
                 var selectedForm = evt.target.value;
                 localStorage.setItem('selectedForm', selectedForm);
@@ -75,13 +81,13 @@ var FormPersister = function() {
         if (localStorage.getItem('selectedForm') !== null) {
             var chosenOption = localStorage.getItem('selectedForm'),
                 
-                // converts selected option text to css class
+                // Converts selected option text to css class
                 formGroupClass = "".concat('.group-', chosenOption.toLowerCase().replace(' ', '-')),
                 
-                // list of form group classes
+                // List of form group classes
                 formGroups = [".group-something-else", ".group-new-business", ".group-careers"];
                 
-                // change display text of option dropdown to the selected option
+                // Change display text of option dropdown to the selected option
                 document.querySelector('span.dropp-header__title.js-value').textContent = chosenOption;
                 
                 // grab the two form blocks that show regardless of option, and set aria attribute    
@@ -100,7 +106,7 @@ var FormPersister = function() {
                     document.querySelector(formGroups[k]).setAttribute("aria-hidden", "true");
                 }
 
-                // If chosen, show it, update aria 
+                // If chosen class, show it & update aria 
                 else {
                     document.querySelector(formGroups[k]).style.display = "block";
                     document.querySelector(formGroups[k]).setAttribute("aria-hidden", "false");
