@@ -27,6 +27,9 @@ All of the above values map back to basic contact information stored in an end u
 
 ![Screenshot of autocomplete functionality on iOS that pulls from the user's contact information](./temp-img/iphone-screenshot.png)
 
+By disabling `autocomplete`, you are running the risk of removing a convenient default behavior of the browser that may provide more convenience---and reliability---than something like the client-side solution provided with this script.
+
+> **NOTE:** For reasons that should be *very* obvious, you would never want to write ***sensitive*** user input to `localStorage`.
 
 ## Configuration
 
