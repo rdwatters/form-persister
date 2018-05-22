@@ -1,0 +1,98 @@
+// Using this only for local dev; remove this module for live site. - RW
+@font-face {
+    font-family: proxima-nova;
+    src: url(./fonts/proxima-nova/proxima-nova-700-webfont.woff2) format("woff2"), url(./fonts/proxima-nova/proxima-nova-700-webfont.woff) format("woff"), url(./fonts/proxima-nova/proxima-nova-700-webfont.ttf) format("opentype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: proxima-nova;
+    src: url(./fonts/proxima-nova/proxima-nova-700-italic-webfont.woff2) format("woff2"), url(./fonts/proxima-nova/proxima-nova-700-italic-webfont.woff) format("woff"), url(./fonts/proxima-nova/proxima-nova-700-italic-webfont.ttf) format("opentype");
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: proxima-nova;
+    src: url(./fonts/proxima-nova/proxima-nova-100-webfont.woff2) format("woff2"), url(./fonts/proxima-nova/proxima-nova-100-webfont.woff) format("woff"), url(./fonts/proxima-nova/proxima-nova-100-webfont.ttf) format("opentype");
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: proxima-nova;
+    src: url(./fonts/proxima-nova/proxima-nova-600-webfont.woff2) format("woff2"), url(./fonts/proxima-nova/proxima-nova-600-webfont.woff) format("woff"), url(./fonts/proxima-nova/proxima-nova-600-webfont.ttf) format("opentype");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: proxima-nova;
+    src: url(./fonts/proxima-nova/proxima-nova-400-webfont.woff2) format("woff2"), url(./fonts/proxima-nova/proxima-nova-400-webfont.woff) format("woff"), url(./fonts/proxima-nova/proxima-nova-400-webfont.ttf) format("opentype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: proxima-nova;
+    src: url(./fonts/proxima-nova/proxima-nova-400-italic-webfont.woff2) format("woff2"), url(./fonts/proxima-nova/proxima-nova-400-italic-webfont.woff) format("woff"), url(./fonts/proxima-nova/proxima-nova-400-italic-webfont.ttf) format("opentype");
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: proxima-nova;
+    src: url(./fonts/proxima-nova/proxima-nova-300-webfont.woff2) format("woff2"), url(./fonts/proxima-nova/proxima-nova-300-webfont.woff) format("woff"), url(./fonts/proxima-nova/proxima-nova-300-webfont.ttf) format("opentype");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: proxima-nova;
+    src: url(./fonts/proxima-nova/proxima-nova-500-webfont.woff2) format("woff2"), url(./fonts/proxima-nova/proxima-nova-500-webfont.woff) format("woff"), url(./fonts/proxima-nova/proxima-nova-500-webfont.ttf) format("opentype");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: freight-text-pro;
+    src: url(./fonts/freight-text-pro/freight-text-pro-400-webfont.woff2) format("woff2"), url(./fonts/freight-text-pro/freight-text-pro-400-webfont.woff) format("woff"), url(./fonts/freight-text-pro/freight-text-pro-400-webfont.ttf) format("opentype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: freight-text-pro;
+    src: url(./fonts/freight-text-pro/freight-text-pro-700-webfont.woff2) format("woff2"), url(./fonts/freight-text-pro/freight-text-pro-700-webfont.woff) format("woff"), url(./fonts/freight-text-pro/freight-text-pro-700-webfont.ttf) format("opentype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: freight-text-pro;
+    src: url(./fonts/freight-text-pro/freight-text-pro-700-italic-webfont.woff2) format("woff2"), url(./fonts/freight-text-pro/freight-text-pro-700-italic-webfont.woff) format("woff"), url(./fonts/freight-text-pro/freight-text-pro-700-italic-webfont.ttf) format("opentype");
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: freight-text-pro;
+    src: url(./fonts/freight-text-pro/freight-text-pro-300-webfont.woff2) format("woff2"), url(./fonts/freight-text-pro/freight-text-pro-300-webfont.woff) format("woff"), url(./fonts/freight-text-pro/freight-text-pro-300-webfont.ttf) format("opentype");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: freight-text-pro;
+    src: url(./fonts/freight-text-pro/freight-text-pro-500-webfont.woff2) format("woff2"), url(./fonts/freight-text-pro/freight-text-pro-500-webfont.woff) format("woff"), url(./fonts/freight-text-pro/freight-text-pro-500-webfont.ttf) format("opentype");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: freight-text-pro;
+    src: url(./fonts/freight-text-pro/freight-text-pro-600-webfont.woff2) format("woff2"), url(./fonts/freight-text-pro/freight-text-pro-600-webfont.woff) format("woff"), url(./fonts/freight-text-pro/freight-text-pro-600-webfont.ttf) format("opentype");
+    font-weight: 600;
+    font-style: normal;
+}
