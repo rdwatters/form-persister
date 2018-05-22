@@ -25,7 +25,7 @@ There is a UX consideration before implementing this script. The input fields be
 
 All of the above values map back to basic contact information stored in an end user's device. If you are an iPhone user, you can see this behavior in the wild by visiting <https://www.rightpoint.com/company/contact>, selecting the "Contact Us" button, and launching the modal form on the website:
 
-![Screenshot of autocomplete functionality on iOS that pulls from the user's contact information](./temp-img/iphone-screenshot.png)
+![Screenshot of autocomplete functionality on iOS that pulls from the user's contact information](./repo-images/iphone-screenshot.png)
 
 By disabling `autocomplete`, you are running the risk of removing a convenient default behavior of the browser that may provide more convenience---and reliability---than something like the client-side solution provided with this script.
 
