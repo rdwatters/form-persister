@@ -45,7 +45,6 @@ $(document).ready(function() {
             $(".form-block .group-something-else").hide();
             $(".form-block .group-new-business").hide();
             $(".form-block .group-careers").show();
-
         } else if (value == "Something Else") {
             $(".form-block").show();
             $(".form-block .info-group-1").show();
